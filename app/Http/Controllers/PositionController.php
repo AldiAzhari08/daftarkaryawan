@@ -33,9 +33,9 @@ class PositionController extends Controller
             'alias' => 'required',
         ]);
         
-        Postions::create($request->post());
+        Positions::create($request->post());
 
-        return redirect()->route('positions.index')->with('success','CompanyPositions has been created successfully.');
+        return redirect()->route('positions.index')->with('success','Positions has been created successfully.');
     }
 
     /**
@@ -46,7 +46,7 @@ class PositionController extends Controller
     */
     public function show(Positions $positions)
     {
-        return view('companies.show',compact('company'));
+        return view('positions.show',compact('positions'));
     }
 
     /**

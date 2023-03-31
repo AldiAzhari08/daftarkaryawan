@@ -15,7 +15,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>Keterengan:</strong>
-                        <input type="email" name="email" class="form-control" placeholder="Keterangan">
+                        <input type="text" name="keterangan" class="form-control" placeholder="Keterangan">
                         @error('keterangan')
                         <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                         @enderror
@@ -24,7 +24,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>Alias:</strong>
-                        <input type="text" name="address" class="form-control" placeholder="Alias">
+                        <input type="text" name="alias" class="form-control" placeholder="Alias">
                         @error('alias')
                         <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                         @enderror

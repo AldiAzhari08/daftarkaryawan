@@ -8,15 +8,15 @@ class PositionController extends Controller
 {
     public function index()
     {
-    $title = 'Positions';
-    $positions = Positions::orderBy('id','asc')->paginate(5);
-    return view('positions.index', compact(['positions', 'title']));
+        $title = "";
+        $positions = Positions::orderBy('id','asc')->paginate(5);
+        return view('positions.index', compact(['positions','title']));
     }
 
     public function create()
     {
-        $title = 'Tambah Data Position';
-        return view('positions.create', compact('title'));
+        $title ="Tambah data position";
+        return view('positions.create',compact(['title']));
     }
 
     /**
@@ -29,8 +29,8 @@ class PositionController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'keterangan' => 'required',
-            'alias' => 'required',
+            'keterangan',
+            'alias',
         ]);
         
         Positions::create($request->post());
@@ -41,10 +41,10 @@ class PositionController extends Controller
     /**
     * Display the specified resource.
     *
-    * @param  \App\company  $positions
+    * @param  \App\company  $company
     * @return \Illuminate\Http\Response
     */
-    public function show(Positions $positions)
+    public function show(Positions $position)
     {
         return view('positions.show',compact('positions'));
     }
@@ -52,43 +52,44 @@ class PositionController extends Controller
     /**
     * Show the form for editing the specified resource.
     *
-    * @param  \App\Company  $company
+    * @param  \App\Company  $position
     * @return \Illuminate\Http\Response
     */
-    public function edit(Positions $company)
+    public function edit(Positions $position)
     {
-        return view('companies.edit',compact('company'));
+        $title ="Edit Data position";
+        return view('positions.edit',compact('position', 'title'));
     }
 
     /**
     * Update the specified resource in storage.
     *
     * @param  \Illuminate\Http\Request  $request
-    * @param  \App\company  $company
+    * @param  \App\company  $position
     * @return \Illuminate\Http\Response
     */
-    public function update(Request $request, Company $company)
+    public function update(Request $request, Positions $position)
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required',
-            'address' => 'required',
+            'keterangan' => 'required',
+            'alias' => 'required',
         ]);
         
-        $company->fill($request->post())->save();
+        $position->fill($request->post())->save();
 
-        return redirect()->route('companies.index')->with('success','Company Has Been updated successfully');
+        return redirect()->route('positions.index')->with('success','Positions Has Been updated successfully');
     }
 
     /**
     * Remove the specified resource from storage.
     *
-    * @param  \App\Company  $company
+    * @param  \App\Positions  $Positions
     * @return \Illuminate\Http\Response
     */
-    public function destroy(Positions $company)
+    public function destroy(Positions $position)
     {
-        $company->delete();
-        return redirect()->route('companies.index')->with('success','Company has been deleted successfully');
+        $position->delete();
+        return redirect()->route('positions.index')->with('success','Positions has been deleted successfully');
     }
 }

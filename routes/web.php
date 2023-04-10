@@ -3,6 +3,7 @@
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PositionController;
+use App\Http\Controllers\DepartementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +15,8 @@ use App\Http\Controllers\PositionController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::resource('companies', PositionController::class);
+Route::resource('companies', DepartementController::class);
 
 Route::get('register', [UserController::class, 'register'])->name('register');
 Route::post('register', [UserController::class, 'register_action'])->name('register.action');
@@ -33,4 +35,6 @@ Route::middleware('auth')->group(
 
         //route position
         Route::resource('positions', PositionController::class);
+
+        Route::resource('departements', DepartementController::class);
     });

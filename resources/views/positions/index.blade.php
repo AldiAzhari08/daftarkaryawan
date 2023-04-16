@@ -19,9 +19,10 @@
     </tr>
   </thead>
   <tbody>
+  @php $no=1; @endphp
   @foreach ($positions as $positions)
                     <tr>
-                        <td>{{ $positions->id }}</td>
+                        <td>{{ $no++ }}</td>
                         <td>{{ $positions->name }}</td>
                         <td>{{ $positions->keterangan }}</td>
                         <td>{{ $positions->alias }}</td>

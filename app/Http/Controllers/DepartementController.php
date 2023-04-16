@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Departements;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DepartementController extends Controller
@@ -15,8 +16,9 @@ class DepartementController extends Controller
 
     public function create()
     {
-        $title = "Tambah Data Departement";
-        return view('departements.create', compact('title'));
+        $title = "Tambah Data Karyawan";
+        $managers = User::where('position','1')->get();
+        return view('departements.create', compact('managers','title'));
     }
 
     public function store(Request $request)
@@ -42,7 +44,8 @@ class DepartementController extends Controller
     public function edit(departements $departement)
     {
         $title = "Edit data karyawan";
-        return view('departements.edit', compact(['departement', 'title']));
+        $managers = User::where('position','1')->get();
+        return view('departements.edit', compact('managers','title'));
     }
 
 

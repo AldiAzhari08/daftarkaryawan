@@ -20,12 +20,20 @@
     </tr>
   </thead>
   <tbody>
+    @php $no=1; @endphp
     @foreach ($departements as $data)
     <tr>
-      <td>{{ $data->id }}</td>
+      <td>{{ $no++ }}</td>
       <td>{{ $data->name }}</td>
       <td>{{ $data->location }}</td>
-      <td>{{ $data->manager_id }}</td>
+      <td>@if($val->manager)
+        {{$val->manager->name}}
+        @else
+        Tidak Ada Manajer
+        @endif
+
+      </td>
+
       <td>
         <form action="{{ route('departements.destroy',$data->id) }}" method="Post">
           <a class="btn btn-primary" href="{{ route('departements.edit',$data->id) }}">Edit</a>

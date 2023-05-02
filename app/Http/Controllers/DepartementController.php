@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Departements;
 use App\Models\User;
+use App\Models\Positions;
 use Illuminate\Http\Request;
 
 class DepartementController extends Controller

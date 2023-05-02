@@ -26,8 +26,8 @@
       <td>{{ $no++ }}</td>
       <td>{{ $data->name }}</td>
       <td>{{ $data->location }}</td>
-      <td>@if($val->manager)
-        {{$val->manager->name}}
+      <td>@if($data->manager)
+        {{$data->manager->name}}
         @else
         Tidak Ada Manajer
         @endif

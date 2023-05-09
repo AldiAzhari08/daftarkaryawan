@@ -5,20 +5,21 @@ use App\Models\Departements;
 use App\Models\User;
 use App\Models\Positions;
 use Illuminate\Http\Request;
+use PDF;
 
 class DepartementController extends Controller
 {
     public function index()
     {
         $title = "Data Karyawan";
-        $departements = Departements::orderBy('id', 'asc')->paginate(5);
+        $departements = Departements::orderBy('id', 'asc')->paginate(20);
         return view('departements.index', compact(['departements', 'title']));
     }
 
     public function create()
     {
         $title = "Tambah Data Karyawan";
-        $managers = User::where('position','1')->get();
+        $managers = User::where('position','manager')->get();
         return view('departements.create', compact('managers','title'));
     }
 
@@ -36,13 +37,13 @@ class DepartementController extends Controller
     }
 
 
-    public function show(departements $departement)
+    public function show(departements $departements)
     {
         return view('departements.show', compact('departement'));
     }
 
 
-    public function edit(departements $departement)
+    public function edit(departements $departements)
     {
         $title = "Edit data karyawan";
         $managers = User::where('position','1')->get();
@@ -50,7 +51,7 @@ class DepartementController extends Controller
     }
 
 
-    public function update(Request $request, departements $departement)
+    public function update(Request $request, departements $departements)
     {
         $request->validate([
             'name' => 'required',
@@ -58,15 +59,23 @@ class DepartementController extends Controller
             'manager_id'
         ]);
 
-        $departement->fill($request->post())->save();
+        $departements->fill($request->post())->save();
 
         return redirect()->route('departements.index')->with('success', 'Departement Has Been updated successfully');
     }
 
 
-    public function destroy(departements $departement)
+    public function destroy(departements $departements)
     {
-        $departement->delete();
+        $departements->delete();
         return redirect()->route('departements.index')->with('success', 'Departement has been deleted successfully');
+    }
+
+    public function exportPDF()
+    {
+        $title = "Laporan Data Departement";
+        $departements = departements::orderBy('id', 'asc')->get();
+        $pdf = PDF::loadview('departements.pdf', compact(['departements', 'title']));
+        return $pdf->stream('laporan-departement-pdf');
     }
 }
